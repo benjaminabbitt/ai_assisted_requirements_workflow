@@ -27,6 +27,34 @@ This system eliminates the requirements bottleneck that emerges when AI-assisted
 
 ---
 
+## Core Benefits
+
+### For Business Owners
+
+- **Async review instead of synchronous meetings** - Review specifications at your convenience, not in scheduled time blocks
+- **AI catches issues early** - Missing parameters, invalid constraints, compliance concerns surfaced before development
+- **Specifications stay current** - Living documentation in source control, not stale wiki pages
+
+### For Developers
+
+- **Approved specs before implementation** - No ambiguity, no waiting for clarification
+- **Test scenarios ready to implement** - Boundary conditions and edge cases already defined
+- **TDD guidance from AI** - Collaborative implementation with pattern enforcement
+
+### For QA
+
+- **Expertise scales without meetings** - Define patterns once in `testing.md`, AI applies them to every story
+- **Consistent edge case coverage** - Boundary conditions automatically generated from API specs and QA patterns
+- **Fuzzing patterns reused** - Reference fuzzing libraries once, AI uses them everywhere
+
+### For Tech Leads
+
+- **Standards enforced automatically** - AI checks compliance before human review
+- **Architecture constraints validated** - AI reads API specs and flags violations before implementation
+- **Context files capture decisions** - Expertise codified and reused, not lost in chat history
+
+---
+
 ## What This System Provides
 
 ### 5 Specialized AI Agents
@@ -140,34 +168,6 @@ See **[CLAUDE.md](CLAUDE.md)** for meta-instructions on using Claude to implemen
 - Best practices for Business Owners, Developers, and Tech Leads
 
 **Important:** All AI agent executions must be logged for audit, learning, and improvement purposes.
-
----
-
-## Core Benefits
-
-### For Business Owners
-
-- **Async review instead of synchronous meetings** - Review specifications at your convenience, not in scheduled time blocks
-- **AI catches issues early** - Missing parameters, invalid constraints, compliance concerns surfaced before development
-- **Specifications stay current** - Living documentation in source control, not stale wiki pages
-
-### For Developers
-
-- **Approved specs before implementation** - No ambiguity, no waiting for clarification
-- **Test scenarios ready to implement** - Boundary conditions and edge cases already defined
-- **TDD guidance from AI** - Collaborative implementation with pattern enforcement
-
-### For QA
-
-- **Expertise scales without meetings** - Define patterns once in `testing.md`, AI applies them to every story
-- **Consistent edge case coverage** - Boundary conditions automatically generated from API specs and QA patterns
-- **Fuzzing patterns reused** - Reference fuzzing libraries once, AI uses them everywhere
-
-### For Tech Leads
-
-- **Standards enforced automatically** - AI checks compliance before human review
-- **Architecture constraints validated** - AI reads API specs and flags violations before implementation
-- **Context files capture decisions** - Expertise codified and reused, not lost in chat history
 
 ---
 
