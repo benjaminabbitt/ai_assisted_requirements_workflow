@@ -119,6 +119,18 @@ Your team's shared knowledge written down in four files:
 
 ## Quick Start
 
+**[→ Implementation Summary](docs/implementation-summary.md)** - Complete setup guide (1-2 days)
+
+Step-by-step guide using IBM ContextForge MCP Gateway (open source):
+1. Install MCP gateway (1 hour)
+2. Create context files (4-6 hours)
+3. Configure AI agents (2-3 hours)
+4. Test end-to-end (2-3 hours)
+5. Integrate with CI/CD (2-3 hours)
+
+**No custom development needed** - uses existing FOSS solutions. See [FOSS Evaluation](docs/foss-components-evaluation.md) for alternatives.
+
+**Traditional approach:**
 1. **Read the workflow** → [docs/workflow.md](docs/workflow.md)
 2. **Review example context files** → [sample-project/](sample-project/)
 3. **Set up your context files** → [docs/context-files.md](docs/context-files.md)
@@ -145,6 +157,18 @@ Your team's common knowledge, externalized. How to structure business.md, archit
 
 ### Implementation
 
+**[Implementation Summary](docs/implementation-summary.md)** ⭐ **START HERE**
+Complete setup guide using IBM ContextForge MCP Gateway (open source). Covers installation, configuration, testing, and CI integration. 1-2 days total vs. 3-4 weeks custom development.
+
+**[FOSS Components Evaluation](docs/foss-components-evaluation.md)**
+Comprehensive evaluation of open source MCP gateways (IBM ContextForge, Lasso, Docker, Traefik, Microsoft). Feature comparison matrix, recommendations, and cost-benefit analysis. **Result:** No custom development needed.
+
+**[MCP Server Evaluation](docs/mcp-server-evaluation.md)**
+Evaluation of official GitHub, GitLab, and Jira MCP servers against workflow requirements. All requirements met by existing servers.
+
+**[MCP Integration Requirements](docs/mcp-integration-requirements.md)**
+Technical requirements for MCP integration: ticketing system access, source control access for non-developers, shared credentials, security controls.
+
 **[Integration Architecture](docs/integration.md)**
 Connecting AI agents to your infrastructure. Ticket system webhooks, source control APIs, CI/CD pipelines. Authentication, rate limiting, error handling, and retry logic.
 
@@ -155,7 +179,7 @@ Two-branch model (spec/ and impl/), tag taxonomy (@pending, @story-{id}), branch
 Automated validation rules, blocking conditions, compliance checks. Running scenarios with @pending skipped, blocking implementation PRs, standards-compliance integration, and test result reporting.
 
 **[Roles & Responsibilities](docs/roles.md)**
-Who does what: Product Owners write stories, Business Owners approve specs, Developers implement, QA Leads maintain patterns, Tech Leads govern standards. Context file ownership via CODEOWNERS.
+Who does what: Product Owners write stories, Business Owners approve specs, Developers implement, QA Leads maintain patterns, Tech Leads govern standards. Context file ownership via CODEOWNERS. Includes MCP access requirements per role.
 
 ### Guides
 
