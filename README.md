@@ -254,7 +254,7 @@ BO: "Perfect - the email is sent, audit log captures it. Approved."
 See **[docs/README.md](docs/README.md)** for comprehensive system documentation including:
 
 - **Integration Architecture** - How to connect AI agents to your ticket system, source control, and CI/CD
-- **Context Files** - The foundation of AI autonomy (business rules, architecture, testing patterns, technical standards)
+- **Context Files** - Your team's common knowledge, externalized (business rules, architecture, testing patterns, technical standards)
 - **Workflow Stages** - Step-by-step process from story creation through implementation
 - **AI Confidence & Escalation** - How AI determines when to draft vs. when to ask humans
 - **Source Control Strategy** - Branch protection, merge rules, tag taxonomy
@@ -358,16 +358,18 @@ See **[CLAUDE.md](CLAUDE.md)** for meta-instructions on using Claude to implemen
 - **Tags track status** - `@pending` for incomplete, `@story-{id}` for traceability
 - **CI blocks incomplete work** - Implementation PRs can't merge with `@pending` scenarios for that story
 
-### Context File System
+### Context Files: Your Team's Common Knowledge, Externalized
 
-- **Four files enable AI autonomy:**
-  - `business.md` - Domain knowledge, business rules, personas, compliance
-  - `architecture.md` - External dependencies, system constraints, third-party APIs
-  - `testing.md` - Step library, boundary patterns, fuzzing references, edge cases
-  - `tech_standards.md` - Language conventions, IoC patterns, directory structure
+**What they are:** Your team's shared knowledge written down in four files.
 
-- **Versioned and governed** - Semantic versioning, CODEOWNERS, freshness monitoring
-- **Shared across projects** - Organization-level, domain-level, team-level, project-level layering
+- `business.md` - Domain knowledge, business rules, personas, compliance
+- `architecture.md` - External dependencies, system constraints, third-party APIs
+- `testing.md` - Step library, boundary patterns, edge case patterns
+- `tech_standards.md` - Language conventions, coding patterns, directory structure
+
+**Why:** AI (and new team members) read these files to understand how your team works. Knowledge that was in people's heads is now written down and reusable.
+
+**Governance:** Version them, assign owners, keep them current.
 
 ### Confidence-Based Workflow
 
