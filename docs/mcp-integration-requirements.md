@@ -292,10 +292,10 @@ const BLOCKED_PATHS = [
 ]
 ```
 
-**Access Audit:**
-- [ ] Log all file access attempts (allowed and denied)
-- [ ] Track which users accessed which files and when
-- [ ] Alert on suspicious access patterns (rapid sequential reads, blocked path attempts)
+**Access Control:**
+- [ ] Enforce path restrictions (allowed/blocked lists)
+- [ ] Return clear error messages when access denied
+- [ ] Validate permissions before file operations
 
 ### Development Tasks
 
@@ -305,7 +305,6 @@ const BLOCKED_PATHS = [
 - [ ] Implement file search and content search
 - [ ] Add caching layer for file contents
 - [ ] Implement authentication/credential management
-- [ ] Add access audit logging
 - [ ] Write integration tests for each git provider
 - [ ] Document configuration and deployment
 - [ ] Create security review checklist for path restrictions
@@ -505,8 +504,7 @@ mcp:
 2. Additional git providers
 3. Caching layer
 4. Rate limiting and retry logic
-5. Audit logging
-6. Health checks and monitoring
+5. Health checks and monitoring
 
 ### Phase 3: Enhanced
 1. OAuth authentication
@@ -545,5 +543,4 @@ mcp:
 - ✅ Path restrictions prevent access to sensitive files
 - ✅ Agents can search and retrieve relevant historical context
 - ✅ System handles authentication failures gracefully
-- ✅ All access is logged for audit purposes
 - ✅ Performance is acceptable (< 2s for typical ticket or file read)

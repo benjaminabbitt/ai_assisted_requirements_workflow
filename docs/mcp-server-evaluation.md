@@ -89,11 +89,9 @@ This document evaluates existing MCP (Model Context Protocol) servers for GitHub
 
 **Custom implementation needed:**
 1. **Path restrictions:** GitHub MCP server doesn't enforce path-based access restrictions. Need application-layer filtering to block sensitive files (`.env`, secrets, credentials).
-2. **Audit logging:** GitHub provides access logs via API, but we need to implement our own audit trail for MCP usage.
 
 **Mitigation:**
 - Implement wrapper service that filters file read requests based on allowed/blocked path patterns
-- Use GitHub API to query access logs for audit trail
 - Configure OAuth scopes to minimum necessary permissions (read-only for non-developers)
 
 ---
@@ -165,11 +163,9 @@ This document evaluates existing MCP (Model Context Protocol) servers for GitHub
 
 **Custom implementation needed:**
 1. **Path restrictions:** GitLab MCP server doesn't enforce path-based access restrictions. Need application-layer filtering.
-2. **Audit logging:** Need to implement audit trail for MCP usage.
 
 **Mitigation:**
 - Same as GitHub: implement wrapper service for path filtering
-- Use GitLab audit events API for access logging
 - Configure OAuth scopes for minimum necessary permissions
 
 **Bonus capability:**
@@ -343,32 +339,24 @@ class SecureSourceControlMCP {
 **Deployment:**
 - Wrapper service sits between agents and MCP servers
 - Enforces allow/block lists
-- Logs all access attempts (allowed and denied)
+- Returns clear error messages when access denied
 - Can be configured per repository
 
-### Audit Logging
+### Error Logging (Optional)
 
-**Problem:** Need comprehensive audit trail for compliance and security.
-
-**Solution:** Implement centralized logging service:
+**Optional:** Basic error logging for troubleshooting:
 
 ```typescript
-interface MCPAccessLog {
+interface MCPError {
   timestamp: Date;
   agent: 'requirements-drafting-assistant' | 'requirements-analyst';
-  user: string; // Business Owner or service account
   platform: 'github' | 'gitlab' | 'jira';
-  operation: string; // 'read_file', 'search_issues', etc.
-  resource: string; // file path, issue ID, etc.
-  allowed: boolean;
-  reason?: string; // if denied
+  operation: string;
+  error: string;
 }
 ```
 
-**Use platform-native audit logs where available:**
-- GitHub: Audit log API
-- GitLab: Audit events API
-- Jira: Audit log (available in Premium/Enterprise)
+**Purpose:** Troubleshoot integration issues, not for compliance/audit.
 
 ### Rate Limiting
 
@@ -422,7 +410,6 @@ interface MCPAccessLog {
 ┌─────────────────────────────────────────────────────────────┐
 │  Secure MCP Wrapper Service                                 │
 │  - Path restriction enforcement                             │
-│  - Audit logging                                            │
 │  - Request caching                                          │
 │  - Rate limiting                                            │
 └─────────┬───────────────────────────────────────────────────┘
@@ -554,24 +541,23 @@ ATLASSIAN_DOMAIN=company
 - Basic security (blocked paths work)
 - Shared credentials between agents
 
-### Phase 2: Production Hardening (Week 3-4)
+### Phase 2: Production Hardening (Week 2-3)
 
-**Objective:** Add security, audit logging, and monitoring
+**Objective:** Add caching, rate limiting, and monitoring
 
 **Tasks:**
 1. Implement comprehensive path restriction service
-2. Add audit logging for all MCP operations
-3. Implement request caching layer
-4. Add rate limiting and retry logic
-5. Move credentials to secrets manager
-6. Add health checks for MCP servers
-7. Create monitoring dashboard
+2. Implement request caching layer
+3. Add rate limiting and retry logic
+4. Move credentials to secrets manager
+5. Add health checks for MCP servers
+6. Create monitoring dashboard (optional)
 
 **Success criteria:**
-- All access logged for audit
 - Sensitive files blocked
 - Rate limits respected
 - Credentials secure
+- Performance acceptable
 
 ### Phase 3: Enhancement (Week 5+)
 
@@ -595,11 +581,6 @@ ATLASSIAN_DOMAIN=company
 - **Why:** MCP servers don't enforce path-based access control
 - **Complexity:** Low (1-2 days)
 - **Implementation:** Wrapper service with allow/block list matching
-
-**✅ Audit Logging Service**
-- **Why:** Need compliance and security audit trail
-- **Complexity:** Low (1-2 days)
-- **Implementation:** Centralized logging service, leverage platform audit APIs
 
 ### Important (Required for Production)
 
@@ -648,9 +629,8 @@ ATLASSIAN_DOMAIN=company
 
 **Custom development required for:**
 1. Path restriction enforcement (GitHub/GitLab)
-2. Audit logging (all platforms)
-3. Request caching (all platforms)
-4. Secrets management integration
+2. Request caching (optional, for performance)
+3. Secrets management integration (optional, for production)
 
 **Estimated effort:** 1-2 weeks for MVP, 2-3 weeks for production-ready
 
@@ -699,7 +679,6 @@ mcp:
 ✅ Security requirements met:
 - Business Owners have read-only access (no code access)
 - Sensitive files are blocked (.env, secrets, keys)
-- All access is logged for audit
 
 ✅ Performance acceptable:
 - Ticket read: < 2 seconds
@@ -720,9 +699,9 @@ mcp:
 **Existing MCP servers for GitHub, GitLab, and Jira fully meet our requirements.** No custom MCP server development is needed.
 
 **Focus custom development on:**
-1. Security wrapper (path restrictions, audit logging)
-2. Performance layer (caching, rate limiting)
-3. Operational tooling (health checks, monitoring)
+1. Security wrapper (path restrictions)
+2. Performance layer (caching, rate limiting - optional)
+3. Operational tooling (health checks, monitoring - optional)
 
 **Total estimated effort:** 3-4 weeks from prototype to production-ready system.
 
@@ -730,6 +709,5 @@ mcp:
 1. Set up accounts and OAuth apps for each platform
 2. Deploy official MCP servers (GitHub, GitLab, Jira)
 3. Build and test path restriction wrapper service
-4. Implement audit logging
-5. Test with both requirements agents
-6. Iterate based on feedback
+4. Test with both requirements agents
+5. Iterate based on feedback

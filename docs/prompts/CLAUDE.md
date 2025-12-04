@@ -1,0 +1,2 @@
+
+When the prompts change in these directories or the sample project data changes, spawn agents running the prompt and a user for each prompt.  Demonstrate and log the interaction into files.  Actual execution logs with the prompts, supporting files, context, etc. Not synthetic/what you want to happen, but what actually happened.  Overwrite the existing files.

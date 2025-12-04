@@ -92,13 +92,13 @@ This document provides meta-instructions for using Claude to implement the AI-au
 
 ---
 
-## Execution Logs and Audit Trail
+## Execution Examples for Documentation
 
 ### Requirement
 
-**All AI agent executions MUST be logged** for audit, learning, and improvement purposes.
+**Generate execution examples when prompts change** to document agent behavior and expected outputs.
 
-### What to Log
+### What to Capture
 
 **For conversational agents** (requirements-drafting-assistant):
 - Full conversation transcript (every question and answer)
@@ -120,22 +120,18 @@ This document provides meta-instructions for using Claude to implement the AI-au
 
 ### Storage
 
-**Development/Example logs:** `docs/prompts/{agent-name}/example-output/`
+**Example outputs:** `docs/prompts/{agent-name}/example-output/`
 - Used for documentation and examples
 - Demonstrates actual agent execution
 - Shows expected output format
-
-**Production logs:** Dedicated audit log system or structured log files
-- Timestamped entries
-- Searchable by ticket ID, agent type, date
-- Retained per compliance requirements
+- Updated when prompt changes
 
 ### Purpose
 
-1. **Audit trail:** Trace back why AI made specific decisions
-   - "Why did the AI draft this scenario?"
-   - "What business rules did it reference?"
-   - "What API constraints did it validate?"
+1. **Documentation:** Show what agent outputs look like
+   - "What does a HIGH confidence spec draft look like?"
+   - "What questions does requirements-drafting-assistant ask?"
+   - "What does a standards-compliance report contain?"
 
 2. **Learning:** Identify patterns in AI escalations to improve context files
    - "AI escalates frequently on auth stories → architecture.md missing auth service docs"
@@ -148,11 +144,6 @@ This document provides meta-instructions for using Claude to implement the AI-au
 4. **Transparency:** Humans can review AI reasoning process
    - BO can see what assumptions AI made
    - Developers can understand why spec was drafted this way
-
-5. **Compliance:** Demonstrate oversight for auditors
-   - Show that AI-generated artifacts have human approval
-   - Prove that escalation process works
-   - Demonstrate traceability from requirement to implementation
 
 ---
 
