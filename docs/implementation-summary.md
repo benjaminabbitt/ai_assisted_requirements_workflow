@@ -224,7 +224,9 @@ contextforge serve --config contextforge-config.yaml
 
 ## Step 3: Set Up Context Files
 
-Create four context files defining your team's knowledge:
+Create context files defining your team's knowledge. **Start with these four:**
+
+**Note:** Context files can grow and shrink based on your needs. Split them when they get too large (e.g., split business.md into business-rules.md and compliance.md), merge them if too fragmented, or add specialized files (security.md, deployment.md, performance.md) as your domain requires. These four are a reasonable starting point, not a rigid requirement.
 
 ### business.md
 ```markdown

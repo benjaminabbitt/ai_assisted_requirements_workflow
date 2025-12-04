@@ -17,14 +17,17 @@
 
 ### Context Files: Your Team's Common Knowledge, Externalized
 
-**What they are:** Your team's shared knowledge written down in four files.
+**What they are:** Your team's shared knowledge written down in context files.
 
+**Start with these four:**
 - `business.md` - Domain knowledge, business rules, personas, compliance
 - `architecture.md` - External dependencies, system constraints, third-party APIs
 - `testing.md` - Step library, boundary patterns, edge case patterns
 - `tech_standards.md` - Language conventions, coding patterns, directory structure
 
 **Why:** AI (and new team members) read these files to understand how your team works. Knowledge that was in people's heads is now written down and reusable.
+
+**Flexibility:** Context files can grow and shrink. Split when too large, merge when too fragmented, add specialized files (security.md, deployment.md, integrations.md) as needed. These four are a starting point, not a rigid structure.
 
 **Governance:** Version them, assign owners, keep them current.
 
