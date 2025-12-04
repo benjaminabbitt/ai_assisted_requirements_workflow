@@ -10,7 +10,7 @@ A workflow system that applies AI acceleration to requirements—the same way te
 
 **The problem:** AI-assisted development increases implementation velocity. Requirements processes (Three Amigos meetings, manual Gherkin writing, calendar coordination) can't keep up. Requirements become the bottleneck.
 
-**The solution:** AI handles the mechanical work (reading docs, drafting specs, generating test cases). Humans provide judgment (approval, priorities, tradeoffs) and apply software engineering (security, performance, architecture).
+**The solution:** AI handles the mechanical work (reading docs, drafting specs, generating test cases). Humans verify artifacts are correct and apply judgment (approval, priorities, tradeoffs) and software engineering (security, performance, architecture).
 
 **The result:** Requirements velocity matches development velocity. 2-4 hours per story → 5-30 minutes.
 
@@ -201,13 +201,16 @@ Complete prompts for each AI agent with execution examples. Requirements-draftin
 
 ## Key Principle
 
-**AI generates deterministic artifacts.** Humans make decisions and apply engineering.
+**AI generates deterministic artifacts. Humans verify they are correct.**
 
-- ✅ AI generates: Specifications, test cases, code following patterns
-- ✅ Humans: Approve requirements, apply engineering (security, performance, architecture), make tradeoffs
+- ✅ **AI generates:** Specifications, test cases, code following patterns
+- ✅ **Humans verify and apply engineering:**
+  - Verify artifacts are correct (approval, review, validation)
+  - Apply engineering judgment (security, performance, architecture, maintainability)
+  - Make decisions and tradeoffs (priorities, business logic, compliance)
 
-**Not:** AI makes business decisions autonomously
-**Instead:** AI eliminates toil; humans retain judgment
+**Not:** AI makes business decisions or generates unreviewed code
+**Instead:** AI eliminates toil; humans verify correctness and retain judgment
 
 ---
 
