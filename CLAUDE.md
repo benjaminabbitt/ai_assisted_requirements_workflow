@@ -292,53 +292,11 @@ claude --prompt docs/prompts/bo-review/prompt.md \
 
 ---
 
-### 4. standards-compliance (One-Shot)
-
-**Purpose:** Review Go code for compliance with project technical standards, especially IoC patterns.
-
-**Mode:** ONE-SHOT - Reads code, checks standards, produces compliance report
-
-**Input:**
-- Go code files to review
-- tech_standards.md (IoC patterns, conventions)
-- architecture.md (for architecture constraints)
-
-**Process:**
-1. Check for missing primary constructors
-2. Detect business logic in production factories
-3. Verify `// coverage:ignore` markers on factories
-4. Check tests use primary constructors (not production factories)
-5. Validate godoc comments on exported items
-6. Calculate compliance score
-
-**Output:**
-- Compliance report with score (0-100%)
-- Critical violations (must fix)
-- Warnings (should fix)
-- Specific fixes with code examples
-- Per-service compliance checklist
-
-**Execution:**
-```bash
-# Using Claude
-claude --prompt docs/prompts/standards-compliance/prompt.md \
-       --context sample-project/context/tech_standards.md,sample-project/context/architecture.md \
-       --input "Review: internal/services/*.go"
-
-# Agent analyzes code, produces compliance report
-```
-
-**Log output to:** `docs/prompts/standards-compliance/example-output/COMPLIANCE-{hash}.md`
-
-**See example:** `docs/prompts/standards-compliance/example-output/COMPLIANCE-REPORT.md`
-
----
-
-### 5. developer-implementation (Conversational)
+### 4. developer-implementation (Conversational)
 
 **Purpose:** Collaborate with developers in implementing step definitions for approved Gherkin specifications following TDD and IoC patterns.
 
-**Mode:** CONVERSATIONAL - Interactive, iterative implementation with developer guidance
+**Mode:** CONVERSATIONAL - Interactive, iterative implementation with developer guidance using specialized subagents
 
 **Input:**
 - Approved spec (merged to main with `@pending @story-{id}` tags)
@@ -347,13 +305,15 @@ claude --prompt docs/prompts/standards-compliance/prompt.md \
 - architecture.md (external dependencies, APIs)
 
 **Process:**
-1. Review spec scenarios (tagged `@pending @story-{id}`)
-2. Guide TDD implementation (write test first, implement, test passes, refactor)
-3. Ensure services use primary constructors
-4. Verify production factories have `// coverage:ignore` and no business logic
-5. Run scenarios until passing
-6. Remove `@pending` tags for this story (keep `@story-{id}`)
-7. CI blocks implementation PR if `@pending` tags present for this specific story
+1. **Plan:** Introspect context files, dependencies, existing code
+2. **Review:** Developer validates plan, adjusts approach
+3. **Execute:** TDD implementation with multi-perspective review
+   - Expert {Language} Developer subagent (idioms, standards)
+   - Neophyte Developer subagent (clarity, documentation)
+   - Specialty subagents (security, performance, concurrency, etc.)
+4. Iterative refinement until production-ready
+5. Remove `@pending` tags for this story (keep `@story-{id}`)
+6. CI blocks implementation PR if `@pending` tags present for this specific story
 
 **Tag lifecycle:**
 - After spec merge: `@pending @story-PROJ-1234` (two separate tags)
@@ -379,7 +339,49 @@ claude --prompt docs/prompts/developer-implementation/prompt.md \
 # Agent provides implementation guidance
 ```
 
-**See example:** `docs/prompts/developer-implementation/prompt.md` (contains full TDD example)
+**See example:** `docs/prompts/developer-implementation/prompt.md` (contains full conversational TDD example with subagents)
+
+---
+
+### 5. standards-compliance (One-Shot)
+
+**Purpose:** Automated code review for compliance with project technical standards, especially IoC patterns.
+
+**Mode:** ONE-SHOT - Runs automatically on PRs, reads code, checks standards, produces compliance report
+
+**Input:**
+- Go code files to review
+- tech_standards.md (IoC patterns, conventions)
+- architecture.md (for architecture constraints)
+
+**Process:**
+1. Check for missing primary constructors
+2. Detect business logic in production factories
+3. Verify `// coverage:ignore` markers on factories
+4. Check tests use primary constructors (not production factories)
+5. Validate godoc comments on exported items
+6. Calculate compliance score
+
+**Output:**
+- Compliance report with score (0-100%)
+- Critical violations (must fix)
+- Warnings (should fix)
+- Specific fixes with code examples
+- Per-service compliance checklist
+
+**Execution:**
+```bash
+# Using Claude (typically automated in CI/CD)
+claude --prompt docs/prompts/standards-compliance/prompt.md \
+       --context sample-project/context/tech_standards.md,sample-project/context/architecture.md \
+       --input "Review: internal/services/*.go"
+
+# Agent analyzes code, produces compliance report
+```
+
+**Log output to:** `docs/prompts/standards-compliance/example-output/COMPLIANCE-{hash}.md`
+
+**See example:** `docs/prompts/standards-compliance/example-output/COMPLIANCE-REPORT.md`
 
 ---
 
@@ -417,15 +419,15 @@ Quick summary:
 - Before spec merges to main
 - Required - BO approval mandatory
 
-**standards-compliance:**
-- During implementation PR review
-- Before code merges to main
-- Can be automated in CI/CD
-
 **developer-implementation:**
 - After spec approved and merged
-- Guides implementation process
-- Used by developer as reference
+- During implementation process
+- Conversational guidance with developer throughout coding
+
+**standards-compliance:**
+- During implementation PR review (automated)
+- Before code merges to main
+- Runs in CI/CD to validate technical standards
 
 ---
 

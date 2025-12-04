@@ -239,13 +239,15 @@ BO: "Perfect - the email is sent, audit log captures it. Approved."
    - Guides Business Owners in reviewing AI-drafted specifications
    - Checks business logic, identifies missing scenarios, flags assumptions
 
-4. **standards-compliance** (One-Shot)
-   - Reviews code for compliance with technical standards
-   - Validates IoC patterns, checks conventions, calculates compliance scores
+4. **developer-implementation** (Conversational)
+   - Collaborates with developers on TDD implementation using subagents
+   - Plan → Review → Execute model with context introspection
+   - Multi-perspective review: Expert developer, neophyte, security, performance, etc.
 
-5. **developer-implementation** (Conversational)
-   - Collaborates with developers on TDD implementation
-   - Guides test-first development, ensures pattern compliance, supports refactoring
+5. **standards-compliance** (One-Shot)
+   - Automated code review for technical standards compliance
+   - Runs automatically on PRs before human review
+   - Validates IoC patterns, checks conventions, calculates compliance scores
 
 ### Complete Workflow Documentation
 
