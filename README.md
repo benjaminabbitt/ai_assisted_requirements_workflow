@@ -10,7 +10,7 @@ A workflow system that applies AI acceleration to requirements—the same way te
 
 **The problem:** AI-assisted development increases implementation velocity. Requirements processes (Three Amigos meetings, manual Gherkin writing, calendar coordination) can't keep up. Requirements become the bottleneck.
 
-**The solution:** AI handles the mechanical work (reading docs, drafting specs, generating test cases). Humans verify artifacts are correct and apply judgment (approval, priorities, tradeoffs) and software engineering (security, performance, architecture).
+**The solution:** Humans make decisions (what to build, how to build it). AI implements those decisions (drafts specs, generates tests, writes code). Humans verify the implementation is correct (approval, engineering review).
 
 **The result:** Requirements velocity matches development velocity. 2-4 hours per story → 5-30 minutes.
 
@@ -201,16 +201,26 @@ Complete prompts for each AI agent with execution examples. Requirements-draftin
 
 ## Key Principle
 
-**AI generates deterministic artifacts. Humans verify they are correct.**
+**Humans make decisions. AI implements them. Humans verify the implementation is correct.**
 
-- ✅ **AI generates:** Specifications, test cases, code following patterns
-- ✅ **Humans verify and apply engineering:**
-  - Verify artifacts are correct (approval, review, validation)
-  - Apply engineering judgment (security, performance, architecture, maintainability)
-  - Make decisions and tradeoffs (priorities, business logic, compliance)
+- ✅ **Humans make decisions:**
+  - What to build (requirements, features, priorities)
+  - How to build it (architecture, patterns, tradeoffs)
+  - What "correct" means (acceptance criteria, quality standards)
 
-**Not:** AI makes business decisions or generates unreviewed code
-**Instead:** AI eliminates toil; humans verify correctness and retain judgment
+- ✅ **AI implements decisions:**
+  - Generates specifications from requirements
+  - Generates test cases from acceptance criteria
+  - Generates code following established patterns
+
+- ✅ **Humans verify implementation and apply engineering:**
+  - Does the spec match our requirements? (BO approval)
+  - Does the code match the spec? (Developer review)
+  - Is the engineering sound? (Security, performance, architecture, maintainability)
+  - Does this fit the bigger picture? (System design, business strategy, team knowledge)
+
+**Not:** AI makes decisions or generates unverified implementations
+**Instead:** AI eliminates implementation toil; humans decide and verify
 
 ---
 
