@@ -469,6 +469,8 @@ All agents depend on well-maintained context files:
 
 **Critical:** Keep context files current. Every outdated context file increases AI escalation rate and slows requirements process.
 
+**Flexibility:** Context files can grow and shrink based on your needs. Split when too large, merge when too fragmented, add specialized files as needed. **When you change context file structure, update agent prompts to reference the new files.** For example, if you split business.md into business-rules.md and compliance.md, modify agent prompts to read both files.
+
 ---
 
 ## MCP Integration

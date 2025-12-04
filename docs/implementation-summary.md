@@ -228,6 +228,8 @@ Create context files defining your team's knowledge. **Start with these four:**
 
 **Note:** Context files can grow and shrink based on your needs. Split them when they get too large (e.g., split business.md into business-rules.md and compliance.md), merge them if too fragmented, or add specialized files as your domain requires. These are a reasonable starting point, not a rigid requirement.
 
+**Important:** When you change context files, update agent prompts to reference the new structure. For example, if you split business.md into business-rules.md and compliance.md, update prompts to read both files instead of just business.md.
+
 ### business.md
 ```markdown
 # Business Context

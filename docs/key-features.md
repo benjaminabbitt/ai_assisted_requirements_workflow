@@ -27,7 +27,7 @@
 
 **Why:** AI (and new team members) read these files to understand how your team works. Knowledge that was in people's heads is now written down and reusable.
 
-**Flexibility:** Context files can grow and shrink. Split when too large, merge when too fragmented, add specialized files (like security.md, deployment.md, or integrations.md) as needed. These are a starting point, not a rigid structure.
+**Flexibility:** Context files can grow and shrink. Split when too large, merge when too fragmented, add specialized files (like security.md, deployment.md, or integrations.md) as needed. These are a starting point, not a rigid structure. **When context files change, update agent prompts to reference the new files.**
 
 **Governance:** Version them, assign owners, keep them current.
 
