@@ -16,25 +16,16 @@ A workflow system that applies AI acceleration to requirements—the same way te
 
 ---
 
-## Why BDD? Executable Specifications in a Dynamic World
+## Why BDD?
 
-**BDD (Behavior-Driven Development) isn't just testing—it's executable specifications that ensure correctness as the world changes.**
+**When AI writes code fast, how do you know it's right?**
 
-### The Problem
+Traditional approaches fail:
+- **Documentation** gets outdated immediately
+- **Unit tests** break when you refactor (even if behavior is correct)
+- **Code review** catches syntax errors but misses behavioral bugs
 
-In modern development:
-- **Developers refactor** code constantly (changing implementation details)
-- **AI generates** code that may not match intent (pattern-following ≠ correctness)
-- **Requirements evolve** as business needs change
-- **Teams grow** and knowledge fragments
-
-**Documentation fails:** It goes stale. No one knows if code matches docs.
-
-**Unit tests fail:** They test implementation details, not business behavior. Refactor the code → tests break even if behavior is correct.
-
-### The Solution: Automated Acceptance Tests as Living Contract
-
-Gherkin scenarios are executable specifications:
+**BDD solves this:** Business-readable scenarios that run as tests.
 
 ```gherkin
 @story-PROJ-1234
@@ -45,29 +36,20 @@ Scenario: User requests password reset successfully
   And the password reset attempt should be logged
 ```
 
-**This scenario:**
-1. Defines expected behavior in business language (not code)
-2. Runs automatically in CI/CD (validates behavior every commit)
-3. Survives refactoring (implementation can change, behavior stays same)
-4. Validates AI output (AI-generated code must pass business requirements)
-5. Documents current behavior (if scenario passes, this is what the system does)
+**What this gives you:**
+- Business Owner reads it and knows what you're building
+- Runs automatically → validates behavior every commit
+- AI-generated code must make it pass → guarantees correctness
+- Refactor all you want → as long as scenarios pass, behavior is preserved
 
-### Why This Matters for AI-Augmented Development
+**For AI-augmented development:**
+1. BO approves: "Yes, this describes what I want"
+2. AI generates code until scenarios pass
+3. Scenarios pass = behavior is correct (not just compiles)
 
-**AI accelerates code generation, but:**
-- AI doesn't understand business intent (only patterns)
-- AI may generate syntactically correct but behaviorally wrong code
-- AI may introduce subtle bugs humans miss in code review
+Think of it as a contract between business intent and code reality. The contract runs and tells you if it's honored.
 
-**BDD provides the safety net:**
-1. AI drafts specification (Gherkin scenarios) → BO approves
-2. AI generates implementation → BDD scenarios validate behavior
-3. Scenarios fail → AI refactors until they pass
-4. Scenarios pass → Behavior matches business intent
-
-**The result:** Fast AI-generated code that's verified to be correct.
-
-[Read more about BDD value in this workflow →](docs/bdd-value.md)
+[Deep dive: 5 ways BDD prevents problems in AI-augmented development →](docs/bdd-value.md)
 
 ---
 
