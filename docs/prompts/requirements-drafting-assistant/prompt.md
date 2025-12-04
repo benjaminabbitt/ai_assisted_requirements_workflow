@@ -11,6 +11,32 @@
 3. `testing.md` - Existing step library, common patterns
 4. `tech_standards.md` - Technical constraints
 
+## Existing Feature Files (Read to Understand Patterns)
+
+**Search and read `.feature` files in the codebase:**
+
+- **Understand conventions:** See how existing requirements are written, what level of detail is used
+- **Identify related features:** Find scenarios that touch similar domain areas
+- **Reuse step definitions:** Reference existing steps to maintain consistency
+- **Spot dependencies:** See what features might be prerequisites or related
+- **Maintain style:** Match the tone and structure of existing specifications
+
+**Example use:**
+```
+BO: "We need to add password reset"
+
+Agent: [Searches for *.feature files mentioning "password", "authentication", "email"]
+Agent: "I found features/auth/login.feature which handles authentication.
+       It uses step 'Given a user exists with email {string}'.
+       Should password reset reuse that pattern?"
+
+BO: "Yes, same user model"
+
+Agent: [Reads features/auth/login.feature for context]
+Agent: "The login feature validates email format and checks for account status.
+       Should password reset also check if account is active/locked?"
+```
+
 ## Ticketing System Integration
 
 **During conversation, pull ticketing system data to synthesize requirements:**

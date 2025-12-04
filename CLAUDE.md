@@ -175,15 +175,17 @@ This system provides 5 specialized AI agents. Each has a specific purpose and op
 **Input:**
 - Initial requirement idea from BO
 - Context files (business.md, architecture.md, testing.md, tech_standards.md)
+- Existing feature files (*.feature - to understand conventions, reuse steps, identify dependencies)
 - Ticketing system data (related tickets, comments/threads, dependencies)
 
 **Process:**
-1. Pull ticketing system data (related work, comments, dependencies) to understand context
-2. Agent asks clarifying questions (references context files, API contracts, past tickets)
-3. BO answers, agent explores further
-4. Agent identifies edge cases, security implications, technical constraints
-5. Conversation builds up complete requirement incrementally
-6. Agent produces structured requirement document
+1. Read existing feature files to understand conventions and related features
+2. Pull ticketing system data (related work, comments, dependencies) to understand context
+3. Agent asks clarifying questions (references context files, API contracts, existing features, past tickets)
+4. BO answers, agent explores further
+5. Agent identifies edge cases, security implications, technical constraints
+6. Conversation builds up complete requirement incrementally
+7. Agent produces structured requirement document
 
 **Output:**
 - Structured requirement with user story, acceptance criteria, edge cases, API dependencies

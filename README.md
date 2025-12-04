@@ -229,6 +229,7 @@ BO: "Perfect - the email is sent, audit log captures it. Approved."
 
 1. **requirements-drafting-assistant** (Conversational)
    - Helps Business Owners articulate complex requirements through guided dialogue
+   - Reads existing feature files to understand conventions and reuse step definitions
    - Pulls ticketing system data (related tickets, comments/threads, dependencies) to synthesize requirements
    - Explores edge cases, validates against constraints, surfaces security implications
 
