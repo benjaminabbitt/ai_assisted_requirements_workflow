@@ -11,9 +11,13 @@
 3. `testing.md` - Existing step library, common patterns
 4. `tech_standards.md` - Technical constraints
 
-## Existing Feature Files (Read to Understand Patterns)
+## MCP Integration (Model Context Protocol)
 
-**Search and read `.feature` files in the codebase:**
+**This agent uses MCP to access external systems with consistent credentials:**
+
+### Existing Feature Files (via MCP)
+
+**Access `.feature` files in the codebase through MCP filesystem integration:**
 
 - **Understand conventions:** See how existing requirements are written, what level of detail is used
 - **Identify related features:** Find scenarios that touch similar domain areas
@@ -21,31 +25,43 @@
 - **Spot dependencies:** See what features might be prerequisites or related
 - **Maintain style:** Match the tone and structure of existing specifications
 
-**Example use:**
+**MCP Usage:**
+```
+Agent: [Uses MCP to search *.feature files for "password", "authentication", "email"]
+Agent: [Uses MCP to read features/auth/login.feature]
+```
+
+**Example conversational flow:**
 ```
 BO: "We need to add password reset"
 
-Agent: [Searches for *.feature files mentioning "password", "authentication", "email"]
+Agent: [MCP search: *.feature files matching "password", "authentication", "email"]
 Agent: "I found features/auth/login.feature which handles authentication.
        It uses step 'Given a user exists with email {string}'.
        Should password reset reuse that pattern?"
 
 BO: "Yes, same user model"
 
-Agent: [Reads features/auth/login.feature for context]
+Agent: [MCP read: features/auth/login.feature]
 Agent: "The login feature validates email format and checks for account status.
        Should password reset also check if account is active/locked?"
 ```
 
-## Ticketing System Integration
+### Ticketing System Integration (via MCP)
 
-**During conversation, pull ticketing system data to synthesize requirements:**
+**Access ticketing system through MCP server with configured credentials:**
 
+**Pull ticketing data during conversation:**
 - **Related tickets:** Search for similar features, past requirements, linked stories
 - **Comments & threads:** Read discussion history, decisions made in comments, clarifications
 - **User feedback:** Pull customer issues, support tickets, feature requests
 - **Historical context:** Review previous discussions, comment threads, decisions on related work
 - **Dependencies:** Identify blocking tickets, prerequisite work, related epics
+
+**MCP Configuration:**
+- Uses same MCP server credentials as requirements-analyst
+- Authenticates via MCP ticketing server (Jira, Linear, GitHub Issues, etc.)
+- Credentials configured once, shared across both agents
 
 **Use this data to:**
 - Reference past decisions: "I see ticket PROJ-456 implemented similar auth logic. Should we follow that pattern?"
@@ -57,13 +73,13 @@ Agent: "The login feature validates email format and checks for account status.
 ```
 BO: "We need to add two-factor authentication for admin users"
 
-Agent: [Searches ticketing system for "authentication", "2FA", "admin"]
+Agent: [MCP query: ticketing system search for "authentication", "2FA", "admin"]
 Agent: "I found PROJ-567 which added 2FA for regular users last quarter.
        Should admin 2FA work the same way, or are there differences?"
 
 BO: "Similar, but admins need backup codes"
 
-Agent: [Pulls PROJ-567 details]
+Agent: [MCP fetch: PROJ-567 full details including comments and related tickets]
 Agent: "PROJ-567 used TOTP with SMS fallback. For admins, you want backup codes
        instead of SMS fallback, or in addition to it?"
 ```

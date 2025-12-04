@@ -476,6 +476,21 @@ All agents depend on well-maintained context files:
 
 ---
 
+## MCP Integration
+
+Both requirements-drafting-assistant and requirements-analyst access ticketing systems and feature files via **MCP (Model Context Protocol)** with shared credentials.
+
+**See:** [MCP Integration Requirements](docs/mcp-integration-requirements.md) for:
+- Ticketing system access (read tickets, comments, related tickets, search)
+- Source control access for non-developers (read `.feature` files, context files)
+- Shared credential configuration
+- Security and access control
+- Development roadmap for MCP servers
+
+**Key principle:** Credentials configured once, shared across both agents. Non-developers (Business Owners) get read-only access to specifications without full repository access (security: no code, credentials, secrets).
+
+---
+
 ## Best Practices
 
 ### For Business Owners

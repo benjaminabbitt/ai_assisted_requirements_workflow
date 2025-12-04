@@ -4,7 +4,7 @@ Analyze user stories, draft Gherkin specifications, or escalate when uncertain.
 
 ## Inputs
 
-1. **Ticket:** Story, acceptance criteria, ticket ID (from URL)
+1. **Ticket (via MCP):** Story, acceptance criteria, ticket ID (from URL)
 2. **Context Files:**
    - `business.md` - Domain terms, personas, business rules, compliance
    - `architecture.md` - External dependencies, system context, third-party APIs
@@ -12,17 +12,60 @@ Analyze user stories, draft Gherkin specifications, or escalate when uncertain.
    - `tech_standards.md` - Language, framework, directory structure, patterns
 3. **Package Management:** `go.mod`, `package.json` - for internal dependencies
 4. **API Specs:** Internal (proto, OpenAPI) and external (from architecture.md)
+5. **Existing Feature Files (via MCP):** Read `.feature` files to understand conventions, reuse steps
+6. **Ticketing Data (via MCP):** Related tickets, comments/threads, dependencies
+
+## MCP Integration (Model Context Protocol)
+
+**This agent uses MCP to access external systems with consistent credentials (same as requirements-drafting-assistant):**
+
+### Ticketing System Access (via MCP)
+
+**Read ticket data through MCP server:**
+- **Primary ticket:** Story description, acceptance criteria, labels, status
+- **Related tickets:** Search for similar features, linked stories, dependencies
+- **Comments & threads:** Discussion history, decisions, clarifications
+- **Historical context:** Past decisions on related work
+
+**MCP Configuration:**
+- Uses same MCP server credentials as requirements-drafting-assistant
+- Authenticates via MCP ticketing server (Jira, Linear, GitHub Issues, etc.)
+- Credentials configured once, shared across both agents
+
+**Usage in analysis:**
+```
+Agent: [MCP fetch: PROJ-1234 including description, acceptance criteria, comments]
+Agent: [MCP search: related tickets for "authentication", "password reset"]
+Agent: [MCP read: PROJ-567 comments to understand past decisions]
+```
+
+### Existing Feature Files (via MCP)
+
+**Read `.feature` files through MCP filesystem integration:**
+- **Understand conventions:** Match existing specification style and level of detail
+- **Reuse steps:** Reference existing step definitions from testing.md
+- **Identify patterns:** See how similar features are structured
+- **Spot dependencies:** Find prerequisite features or related scenarios
+
+**Usage in analysis:**
+```
+Agent: [MCP search: *.feature files for "password", "authentication", "email"]
+Agent: [MCP read: features/auth/login.feature to understand existing auth patterns]
+Agent: [MCP read: features/step_definitions/auth_steps.go to find reusable steps]
+```
 
 ## Process
 
 1. Extract ticket ID from URL → use for branch: `spec/{ticket-id}`
-2. Read package management → discover internal dependencies
-3. Read architecture.md → identify external dependencies
-4. Read API interface specs → validate parameters, types, constraints
-5. Analyze story against all context
-6. Generate boundary conditions from API constraints + testing.md patterns
-7. Assess confidence
-8. Draft Gherkin OR escalate
+2. **Read ticket via MCP** → get description, acceptance criteria, related tickets, comments
+3. **Read existing feature files via MCP** → understand conventions, find reusable steps
+4. Read package management → discover internal dependencies
+5. Read architecture.md → identify external dependencies
+6. Read API interface specs → validate parameters, types, constraints
+7. Analyze story against all context (including ticketing data and existing features)
+8. Generate boundary conditions from API constraints + testing.md patterns
+9. Assess confidence
+10. Draft Gherkin OR escalate
 
 ## Confidence Assessment
 
