@@ -44,7 +44,7 @@ Scenario: User requests password reset successfully
 
 **For AI-augmented development:**
 1. BO approves: "Yes, this describes what I want"
-2. AI generates code until scenarios pass
+2. AI and Software Engineers craft code until scenarios pass
 3. Scenarios pass = behavior is correct (not just compiles)
 
 Think of it as a contract between business intent and code reality. The contract runs and tells you if it's honored.
