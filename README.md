@@ -49,7 +49,7 @@ Scenario: User requests password reset successfully
 
 Think of it as a contract between business intent and code reality. The contract runs and tells you if it's honored.
 
-[Deep dive: 5 ways BDD prevents problems in AI-augmented development →](docs/bdd-value.md)
+**Want to understand why BDD is critical for AI-augmented development?** See [BDD Value Proposition](docs/bdd-value.md) for a deep dive into 5 ways BDD prevents problems.
 
 ---
 
@@ -105,17 +105,16 @@ Think of it as a contract between business intent and code reality. The contract
 
 ### Context Files: Your Team's Common Knowledge, Externalized
 
-Your team's shared knowledge written down in context files. **Start with these four:**
+Your team's shared knowledge written down in context files—enabling AI to do what Dev and QA would do in a discussion:
+
 - `business.md` - Domain knowledge, business rules, personas, compliance
 - `architecture.md` - External dependencies, system constraints, third-party APIs
 - `testing.md` - Step library, boundary patterns, edge case patterns
 - `tech_standards.md` - Language conventions, coding patterns, directory structure
 
-**Why:** AI (and new team members) read these to understand how your team works. Knowledge that was in people's heads is now written down and reusable.
+**Why it works:** AI reads these files to understand how your team works. Knowledge that was in people's heads is now written down and reusable. Context files can grow and shrink based on your needs.
 
-**Note:** Context files can grow and shrink based on your needs. Split them when they get too large, merge them if they're too fragmented, add new ones for specialized domains (like security.md, deployment.md, or integrations.md). These are a reasonable starting point, not a rigid requirement. **When you change context files, update agent prompts to reference the new structure.**
-
-[Read more about context files →](docs/context-files.md)
+**[Complete Guide: Context Files →](docs/context-files.md)**
 
 ---
 
@@ -143,6 +142,8 @@ Step-by-step guide using IBM ContextForge MCP Gateway (open source):
 
 ## Documentation
 
+**[→ Complete Documentation Index](docs/README.md)** - Start here for the full documentation overview
+
 ### Core Concepts
 
 **[Workflow Overview](docs/workflow.md)**
@@ -169,7 +170,7 @@ Comprehensive evaluation of open source MCP gateways (IBM ContextForge, Lasso, D
 Evaluation of official GitHub, GitLab, and Jira MCP servers against workflow requirements. All requirements met by existing servers.
 
 **[MCP Integration Requirements](docs/mcp-integration-requirements.md)**
-Technical requirements for MCP integration: ticketing system access, source control access for non-developers, shared credentials, security controls.
+Technical requirements for MCP integration: ticketing system access, source control access for non-developers, shared credentials, security controls. **Status: ✅ Resolved - Use FOSS Solutions**
 
 **[Integration Architecture](docs/integration.md)**
 Connecting AI agents to your infrastructure. Ticket system webhooks, source control APIs, CI/CD pipelines. Authentication, rate limiting, error handling, and retry logic.

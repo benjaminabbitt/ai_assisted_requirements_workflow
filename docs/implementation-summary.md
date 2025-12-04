@@ -355,7 +355,7 @@ claude --agent requirements-drafting-assistant
 - Access: GitHub (read .feature files, create branches/PRs)
 - Context: business.md, architecture.md, testing.md, tech_standards.md
 
-**Trigger:** Automatic (webhook on ticket labeled "ready-for-spec") or manual
+**Trigger:** Automatic (ticket labeled "ready-for-spec" via webhook) or manual
 
 **Workflow:**
 1. Reads ticket via MCP
