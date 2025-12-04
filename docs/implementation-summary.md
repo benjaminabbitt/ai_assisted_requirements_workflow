@@ -351,7 +351,7 @@ claude --agent requirements-drafting-assistant
 - Access: GitHub (read .feature files, create branches/PRs)
 - Context: business.md, architecture.md, testing.md, tech_standards.md
 
-**Trigger:** Automatic (webhook on ticket labeled "ready-for-spec")
+**Trigger:** Automatic (webhook on ticket labeled "ready-for-spec") or manual
 
 **Workflow:**
 1. Reads ticket via MCP
@@ -359,7 +359,31 @@ claude --agent requirements-drafting-assistant
 3. Reads existing .feature files for conventions
 4. Drafts Gherkin scenarios
 5. Creates `spec/PROJ-1234` branch
-6. Opens PR for BO review
+6. **Opens Gherkin/Cucumber PR** for BO review (triggers bo-review)
+
+**Output:** Gherkin/Cucumber PR with .feature files
+
+### bo-review
+
+**Purpose:** Assist Business Owners in reviewing AI-drafted Gherkin specifications
+
+**Configuration:**
+- MCP endpoint: http://localhost:8080
+- Access: GitHub (read .feature files in PR)
+- Access: Jira (read original ticket for context)
+- Context: business.md (for business rules validation)
+
+**Trigger:** Runs on Gherkin/Cucumber PRs (spec/ branches containing .feature files)
+
+**Workflow:**
+1. Reads AI-drafted .feature files from PR
+2. Compares against original ticket requirements
+3. Validates business rules are correctly applied
+4. Identifies missing critical scenarios
+5. Flags security/compliance concerns
+6. Produces review report with APPROVED or CHANGES REQUESTED
+
+**Output:** Review report posted as PR comment, guiding BO in approval decision
 
 **See:** [AI Agents Guide](agents.md) for detailed documentation.
 
@@ -433,15 +457,36 @@ for i in {1..65}; do curl http://localhost:8080/jira/ticket/PROJ-1234; done
 ### GitHub Actions Example
 
 ```yaml
-name: Spec PR Review
+name: Gherkin/Cucumber PR Automation
 
 on:
+  issues:
+    types: [labeled]
   pull_request:
     paths:
       - 'features/**/*.feature'
 
 jobs:
+  # requirements-analyst: Runs when ticket labeled "ready-for-spec"
+  draft-spec:
+    if: github.event.label.name == 'ready-for-spec'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run requirements-analyst
+        run: |
+          claude --agent requirements-analyst \
+                 --input "Ticket: ${{ github.event.issue.html_url }}"
+
+      - name: Create Gherkin/Cucumber PR
+        run: |
+          # Agent creates spec/PROJ-1234 branch with .feature files
+          # Opens PR for BO review (triggers bo-review below)
+
+  # bo-review: Runs on Gherkin/Cucumber PRs (spec/ branches)
   bo-review-assistant:
+    if: startsWith(github.head_ref, 'spec/')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -452,7 +497,7 @@ jobs:
                  --input "PR #${{ github.event.pull_request.number }}" \
                  --context business.md
 
-      - name: Comment review on PR
+      - name: Post review report as PR comment
         run: |
           gh pr comment ${{ github.event.pull_request.number }} \
              --body-file review-report.md

@@ -206,6 +206,8 @@ claude --prompt docs/prompts/requirements-drafting-assistant/prompt.md \
 
 **Mode:** ONE-SHOT - Reads ticket, analyzes, produces draft spec in single execution
 
+**Trigger:** Runs when ticket is labeled "ready-for-spec" (webhook) or manually invoked. Creates Gherkin/Cucumber PR for BO review.
+
 **Input:**
 - User story and acceptance criteria from ticket
 - Ticket ID (extracted from URL for branch naming)
@@ -250,6 +252,8 @@ claude --prompt docs/prompts/requirements-analyst/prompt.md \
 **Purpose:** Guide Business Owners in reviewing AI-drafted specifications for business correctness.
 
 **Mode:** ONE-SHOT - Reads draft spec, performs review, produces report
+
+**Trigger:** Runs on Gherkin/Cucumber PRs (spec/ branches) to assist BO in reviewing specifications before approval.
 
 **Input:**
 - AI-drafted specification (feature file in spec/ branch)
