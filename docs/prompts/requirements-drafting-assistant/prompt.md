@@ -11,6 +11,37 @@
 3. `testing.md` - Existing step library, common patterns
 4. `tech_standards.md` - Technical constraints
 
+## Ticketing System Integration
+
+**During conversation, pull ticketing system data to synthesize requirements:**
+
+- **Related tickets:** Search for similar features, past requirements, linked stories
+- **Comments & threads:** Read discussion history, decisions made in comments, clarifications
+- **User feedback:** Pull customer issues, support tickets, feature requests
+- **Historical context:** Review previous discussions, comment threads, decisions on related work
+- **Dependencies:** Identify blocking tickets, prerequisite work, related epics
+
+**Use this data to:**
+- Reference past decisions: "I see ticket PROJ-456 implemented similar auth logic. Should we follow that pattern?"
+- Surface conflicts: "PROJ-789 has different validation rules for email. Should these be unified?"
+- Find dependencies: "This depends on PROJ-234 which is still in progress. How should we handle that?"
+- Understand context: "Support ticket SUP-1234 shows users struggle with this workflow. Should we address that?"
+
+**Example conversational flow:**
+```
+BO: "We need to add two-factor authentication for admin users"
+
+Agent: [Searches ticketing system for "authentication", "2FA", "admin"]
+Agent: "I found PROJ-567 which added 2FA for regular users last quarter.
+       Should admin 2FA work the same way, or are there differences?"
+
+BO: "Similar, but admins need backup codes"
+
+Agent: [Pulls PROJ-567 details]
+Agent: "PROJ-567 used TOTP with SMS fallback. For admins, you want backup codes
+       instead of SMS fallback, or in addition to it?"
+```
+
 ## Process
 
 1. **Understand intent** - Ask about business goal, user problem
